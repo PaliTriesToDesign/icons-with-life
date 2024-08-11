@@ -15,16 +15,19 @@ body.addEventListener("click", event => {
 
 // Adds an eventListener to each icon in the array
 icons.forEach((icon, index) => {
-    if(!icon.classList.contains("empty-icon")){
         icon.addEventListener("mouseenter", () => {
+            if(icon.classList.contains("empty-icon")){
+                titleEl.innerText = "coming soon...";
+            }
+
             titleEl.innerText = iconsArr[index].name.toLowerCase();
         })
-    }
 
-    icon.addEventListener("mouseleave", () => {
-        titleEl.innerHTML = "iconswith.<span>life</span>";
-    })
-});
+        icon.addEventListener("mouseleave", () => {
+            titleEl.innerHTML = "iconswith.<span>life</span>";
+        })
+    }
+);
 
 // Shows a modal with each icon's info
 icons.forEach((icon, index) => {
