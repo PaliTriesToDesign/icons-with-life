@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icons With Life</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:ital,wght@0,100..900;1,100..900&family=Manrope:wght@200..800&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+
+    <!-- Links -->
+    <link rel="stylesheet" href="styles.css">
+    <script src="main.js" type="module" defer></script>
+</head>
+<body>
+    
+    <main class="main-section" draggable="false">
+        <div id="grid" class="icons-grid">
+
+            <div id="titleContainer" class="title-container">
+                <p id="title">iconswith.<span>life</span></p>
+                <p id="titleNames">vaib & pali</p>
+            </div>
+
+            <div class="icon">
+                <!-- <img src="assets/svg/Cross Icon.svg" alt="Cross icon"> -->
+                <lottie-player id="closeIcon" src="assets/json/closeIconV1.json" background="transparent"  speed="1"  style="width: 50px; height: 50px;" hover loop></lottie-player>
+            </div>
+            <div class="icon">
+                <!-- <img src="assets/svg/Plus Icon.svg" alt="Cross icon"> -->
+                <lottie-player id="plusIcon" src="assets/json/plusIcon.json" background="transparent"  speed="1"  style="width: 50px; height: 50px;" hover loop></lottie-player>
+            </div>
+            
+            <div class="icon">
+                <!-- <img src="assets/svg/Plus Icon.svg" alt="Cross icon"> -->
+                <lottie-player id="plusToCloseIcon" src="assets/json/plusToCloseIcon.json" background="transparent"  speed="1"  style="width: 50px; height: 50px;" hover loop></lottie-player>
+            </div>
+            <div class="icon">
+                <!-- <img src="assets/svg/Search Icon.svg" alt="Cross icon"> -->
+                <lottie-player id="searchIcon" src="assets/json/searchIconV2.json" background="transparent"  speed="1"  style="width: 50px; height: 50px;" hover loop></lottie-player>
+            </div>
+
+            <div class="icon">
+                <lottie-player id="alertIcon" src="assets/json/alertIcon.json" background="transparent"  speed="1"  style="width: 50px; height: 50px;" hover loop></lottie-player>
+            </div>
+
+            <div class="icon empty-icon">
+                <p>-</p>
+            </div>
+            <div class="icon empty-icon">
+                <p>-</p>
+            </div>
+            <div class="icon empty-icon">
+                <p>-</p>
+            </div>
+            <div class="icon empty-icon">
+                <p>-</p>
+            </div>
+            <div class="icon empty-icon">
+                <p>-</p>
+            </div>
+            <div class="icon empty-icon">
+                <p>-</p>
+            </div>
+            <div class="icon empty-icon">
+                <p>-</p>
+            </div>
+            
+        </div>
+
+        <div id="gridTest"></div>
+
+    </main>
+
+    <!-- MODAL -->
+    <div id="modal" class="texture">
+        <div id="iconModal" class="icon-modal">
+            <div id="closeModal" class="close-icon">
+                <lottie-player src="assets/json/closeIconV1.json" background="transparent"  speed="1"  style="width: 36px; height: 36px;" hover></lottie-player>
+            </div>
+            <div id="iconContainer" class="icon-container">
+                <lottie-player src="assets/json/searchIcon.json" background="transparent"  speed=".5"  style="width: 250px; height: 250px;" loop autoplay></lottie-player>
+            </div>
+            <div class="button-textarea-container">
+                <div class="textarea">
+                    <textarea name="json-code" id="jsonCode" rows="10" readonly>
+                        
+                    </textarea>
+                </div>
+
+                <div class="button-container">
+                    <a id="downloadSvg" href="assets/svg/Cross Icon.svg" download="cross_icon.svg">SVG</a>
+                    <a id="downloadJson" href="assets/json/closeIconV1.json" download="cross_icon.json">JSON</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END OF MODAL -->
+
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+</body>
+</html>
