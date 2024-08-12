@@ -4,18 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Icons With Life</title>
+    <link rel="icon" type="image/x-icon" href="/assets/svg/favicon.svg">
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:ital,wght@0,100..900;1,100..900&family=Manrope:wght@200..800&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 
-
     <!-- Links -->
     <link rel="stylesheet" href="styles.css">
     <script src="main.js" type="module" defer></script>
 </head>
 <body>
+    <div id="logoContainer" class="logo-container">
+        <a href="index.html">
+            <lottie-player id="logo" src="assets/json/logo.json" background="transparent"  speed="1"  style="width: 35px; height: 35px;" hover loop></lottie-player>
+        </a>
+
+        <div id="nameAndVersion">
+            <div id="nameAndVersionInner">
+                <div id="nameContainer">
+                    <p>iconswith.<span>life</span></p>
+                </div>
+                <div id="version" class="version">
+                    <p>v1.0.0</p>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <main class="main-section" draggable="false">
         <div id="grid" class="icons-grid">
@@ -26,25 +42,22 @@
             </div>
 
             <div class="icon">
-                <!-- <img src="assets/svg/Cross Icon.svg" alt="Cross icon"> -->
-                <lottie-player id="closeIcon" src="assets/json/closeIconV1.json" background="transparent"  speed="1"  style="width: 50px; height: 50px;" hover loop></lottie-player>
+                <lottie-player id="closeIcon" src="assets/json/closeIconV1.json" background="transparent"  speed="1"  style="width: 30px; height: 30px;" hover loop></lottie-player>
             </div>
             <div class="icon">
-                <!-- <img src="assets/svg/Plus Icon.svg" alt="Cross icon"> -->
-                <lottie-player id="plusIcon" src="assets/json/plusIcon.json" background="transparent"  speed="1"  style="width: 50px; height: 50px;" hover loop></lottie-player>
+                <lottie-player id="plusIcon" src="assets/json/plusIcon.json" background="transparent"  speed="1"  style="width: 30px; height: 30px;" hover loop></lottie-player>
             </div>
             
             <div class="icon">
-                <!-- <img src="assets/svg/Plus Icon.svg" alt="Cross icon"> -->
-                <lottie-player id="plusToCloseIcon" src="assets/json/plusToCloseIcon.json" background="transparent"  speed="1"  style="width: 50px; height: 50px;" hover loop></lottie-player>
+                <lottie-player id="plusToCloseIcon" src="assets/json/plusToCloseIcon.json" background="transparent"  speed="1"  style="width: 30px; height: 30px;" hover loop></lottie-player>
             </div>
             <div class="icon">
-                <!-- <img src="assets/svg/Search Icon.svg" alt="Cross icon"> -->
-                <lottie-player id="searchIcon" src="assets/json/searchIconV2.json" background="transparent"  speed="1"  style="width: 50px; height: 50px;" hover loop></lottie-player>
+                <lottie-player id="searchIcon" src="assets/json/searchIconV2.json" background="transparent"  speed="1"  style="width: 30px; height: 30px;" hover loop></lottie-player>
             </div>
 
             <div class="icon">
-                <lottie-player id="alertIcon" src="assets/json/alertIcon.json" background="transparent"  speed="1"  style="width: 50px; height: 50px;" hover loop></lottie-player>
+                <img src="assets/svg/Alert.svg" alt="Alert Icon">
+                <lottie-player id="alertIcon" src="assets/json/alertIcon.json" background="transparent"  speed="1"  style="width: 30px; height: 30px;" hover loop></lottie-player>
             </div>
 
             <div class="icon empty-icon">

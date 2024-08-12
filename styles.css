@@ -27,6 +27,52 @@ body {
     font-weight: 500;
 }
 
+img {
+    display: block;
+    width: 100%;
+}
+
+#logoContainer {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    margin: 1rem;
+    top: 0;
+    left: 0%;
+    cursor: pointer;
+}
+
+#logo {
+    overflow: hidden;
+    border-radius: 0.3rem;
+}
+
+
+#logoContainer #version {
+    border-radius: .5rem;
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+#nameAndVersion {
+    overflow: hidden;
+}
+
+#logoContainer:hover #nameAndVersionInner {
+    transform: translateX(0);
+}
+
+#nameAndVersionInner {
+    display: flex;
+    flex-flow: row;
+    gap: .5rem;
+
+    transform: translateX(-70%);
+    transition: all 200ms cubic-bezier(.47, 1.64, .4, .6);
+}
+
 #grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -58,8 +104,13 @@ body {
     font-size: 1.5rem;
 }
 
-#title span {
+#title {
+    font-weight: 500;
+}
+
+#title span, #nameContainer span {
     font-style: italic;
+    font-weight: 700;
 }
 
 #titleNames {
@@ -90,13 +141,13 @@ body {
     align-items: center;
     justify-content: center;
 
-    border-radius: 1rem;
+    border-radius: .75rem;
     min-width: 5rem;
     min-height: 5rem;
     opacity: 0;
     position: relative;
 
-    border: 3px solid #e8e8e8;
+    border: 1px solid #e8e8e8;
 }
 
 .empty-icon p {
@@ -104,20 +155,27 @@ body {
     font-weight: bold;
 }
 
-.empty-icon:hover {
-    border: 3px solid #dddddd;
-    cursor: pointer;
+.icon > img {
+    width: 30px;
+    position: absolute;
 }
 
-/* .icon:nth-of-type(1), .icon:nth-of-type(4) {
-    grid-column: 2/3;
-} */
-
+.icon:has(img + lottie-player) lottie-player {
+    opacity: 0;
+}
 
 
 .icon:hover {
-    border: 3px solid var(--cell-border);
+    border: 2px solid var(--text-color);
     cursor: pointer;
+}
+
+.icon lottie-player:hover {
+    opacity: 1;
+}
+
+.icon:has(lottie-player:hover) > img {
+    opacity: 0;
 }
 
 .title-container p:last-child {
@@ -133,7 +191,6 @@ body {
     position: absolute;
     inset: 0;
     /* background: linear-gradient(30deg, var(--background-color), var(--gradient-color)); */
-    background-color: hsla(196, 6%, 95%, 1);
     /* backdrop-filter: blur(10px); */
     z-index: 1;
 }
@@ -146,7 +203,7 @@ body {
     left: 0;
     right: 0;
     top: 0;
-    opacity: .3;
+    opacity: 1;
     z-index: -1;
     width: 100%;
 }
@@ -178,6 +235,7 @@ body {
     gap: 1rem;
     padding: 2rem;
     background-color: white;
+    border: 2px solid var(--text-color);
     border-radius: 1rem;
     position: relative;
 }
