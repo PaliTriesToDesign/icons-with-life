@@ -1,10 +1,101 @@
-import { iconsArr } from "./iconsInfo.js";
+import { jsonArr } from "./js/iconsInfo.js";
+import { createGsapTimeline, generateRandomOrder } from "./js/animations.js";
 
 const body = document.querySelector("body");
+const titleContainer = document.getElementById("titleContainer");
 const titleEl = document.getElementById("title");
-const icons = document.querySelectorAll(".icon");
 const modal = document.getElementById("modal");
+const gridEl = document.getElementById("grid");
+const iconsArr = [];
+const iconCells = [];
 
+class Icon {
+    constructor(id, name, size, needsSVG = false) {
+        this.id = id;
+        this.name = name;
+        this.jsonUrl = `assets/json/${name}.json`;
+        this.svgUrl = `assets/svg/${name}.svg`;
+        this.size = size;
+        if(needsSVG) {
+            this.lottie = `
+            <img src="${this.svgUrl}" alt="${name} icon">
+            <lottie-player 
+                    id="${id}" 
+                    src="${this.jsonUrl}"
+                    background="transparent" 
+                    speed="1"  
+                    style="width: ${this.size}px; 
+                    height: ${this.size}px;" 
+                    hover loop>
+                </lottie-player>
+            `;
+        } else {
+            this.lottie = `
+            <lottie-player 
+                    id="${id}" 
+                    src="${this.jsonUrl}"
+                    background="transparent" 
+                    speed="1"  
+                    style="width: ${this.size}px; 
+                    height: ${this.size}px;" 
+                    hover loop>
+                </lottie-player>
+            `;
+        }
+    };
+};
+
+const closeIcon = new Icon(1, 'closeIcon', 30);
+const plusIcon = new Icon(2, 'plusIcon', 30);
+const alertIcon = new Icon(3, 'alertIcon', 30, true);
+const searchIcon = new Icon(4, 'searchIcon', 30);
+const plusToCloseIcon = new Icon(5, 'plusToCloseIcon', 30);
+const shareIcon = new Icon(6, 'shareIcon', 30);
+const menuIcon = new Icon(7, 'menuIcon', 30);
+
+iconsArr.push(closeIcon, plusIcon, alertIcon, searchIcon,      plusToCloseIcon, shareIcon, menuIcon);
+
+iconsArr.forEach((icon, index) => {
+    let cell = document.createElement("div");
+    cell.classList.add("icon");
+    cell.innerHTML = icon.lottie
+    
+    iconCells.push(cell);
+
+    if(!cell.classList.contains("empty-icon")) {
+        cell.addEventListener("click", () => {
+            updateModal(jsonArr[index]);
+            displayModal("flex");
+    })};
+
+    // Adds an eventListener to each icon in the array
+    cell.addEventListener("mouseenter", () => {
+        if(cell.classList.contains("empty-icon")){
+            titleEl.innerText = "coming soon...";
+        }
+
+        titleEl.innerText = jsonArr[index].name.toLowerCase();
+    });
+
+    cell.addEventListener("mouseleave", () => {
+        titleEl.innerHTML = "iconswith.<span>life</span>";
+    });
+});
+
+// Fills the rest of the grid with empy cells
+const totalCells = 12; // Arbitrary number
+const totalEmptyCells = totalCells - iconsArr.length;
+
+for(let i = 0; i <  totalEmptyCells; i++) {
+    let cell = document.createElement("div");
+    cell.classList.add("icon", "empty-icon");
+    cell.innerHTML = "<p>-</p>";
+    iconCells.push(cell);
+}
+
+iconCells.forEach(cell => {
+    gridEl.appendChild(cell);
+})
 
 // Checks if the body contains a class to display the modal
 body.addEventListener("click", event => {
@@ -13,100 +104,45 @@ body.addEventListener("click", event => {
     };
 });
 
-// Adds an eventListener to each icon in the array
-icons.forEach((icon, index) => {
-        icon.addEventListener("mouseenter", () => {
-            if(icon.classList.contains("empty-icon")){
-                titleEl.innerText = "coming soon...";
-            }
-
-            titleEl.innerText = iconsArr[index].name.toLowerCase();
-        })
-
-        icon.addEventListener("mouseleave", () => {
-            titleEl.innerHTML = "iconswith.<span>life</span>";
-        })
-    }
-);
-
-// Shows a modal with each icon's info
-icons.forEach((icon, index) => {
-    if(!icon.classList.contains("empty-icon")){
-
-        icon.addEventListener("click", () => {
-
-            updateModal(iconsArr[index]);
-            displayModal("flex");
-
-        })
-    }
-})
 
 closeModal.addEventListener("click", () => {
     displayModal("none");
 });
 
-function updateModal(icon){
+// UPDATE MODAL ELEMENTS =========
+function updateIconContainer(icon) {
     const iconContainer = document.getElementById("iconContainer");
+    iconContainer.innerHTML = icon.lottie;
+}
+
+function updateDownloadLinks(icon) {
     const downloadSvg = document.getElementById("downloadSvg");
     const downloadJson = document.getElementById("downloadJson");
-    const textarea = document.querySelector("textarea");
     
-    iconContainer.innerHTML = icon.lottie;
-
     downloadSvg.setAttribute("href", icon.url[1].svg);
     downloadSvg.setAttribute("download", `${icon.name}.svg`);
-
+    
     downloadJson.setAttribute("href", icon.url[0].json);
     downloadJson.setAttribute("download", `${icon.name}.json`);
+}
 
+function updateTextarea(icon) {
+    const textarea = document.querySelector("textarea");
     textarea.innerText = icon.jsonCode;
+}
+
+function updateModal(icon) {
+    updateIconContainer(icon);
+    updateDownloadLinks(icon);
+    updateTextarea(icon);
 }
 
 function displayModal(){
     modal.classList.toggle("display-modal");
 };
+// END OF UPDATE MODAL ELEMENTS ==
 
-// GSAP ==========================
-const gsapTl = gsap.timeline({defaults: {duration: .75}});
-
-gsapTl
-    .to(titleContainer, {opacity: 1})
-    .fromTo(titleContainer, {y: 10}, {y: 0}, "<")
-
-    function* generateRandomOrder() {
-        // Create an array with numbers from 0 to 10
-        let numbers = [];
-        for (let i = 0; i < icons.length; i++) {
-            numbers.push(i);
-        }
-    
-        //  I HAVE NO IDEA HOW THIS WORKS
-        // Shuffle the array using Fisher-Yates algorithm
-        for (let i = numbers.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
-        }
-    
-        // Yield one number at a time
-        for (let number of numbers) {
-            yield number;
-        }
-    }
-    
-    // Create an instance of the generator
-    const randomOrderGenerator = generateRandomOrder();
-    
-    for (let i = 0; i < icons.length; i++) {
-        gsapTl.to(icons[randomOrderGenerator.next().value], {
-            opacity: 1,
-            duration: .3
-        }, "-=.1");
-    }
-
-// END OF GSAP ===================
-
-// COPY CODE
+// COPY CODE FUNCTION ============
 const jsonTextarea = document.getElementById("jsonCode");
 
 jsonTextarea.addEventListener("mouseenter", () => {
@@ -137,14 +173,34 @@ function copiedTooltip(){
     copiedTooltip.innerText = 'Copy Code';
     return copiedTooltip;
 }
-// END OF COPY CODE
+// END OF COPY CODE FUNCTION =====
 
-function createIconCell(id, name){
-    let iconCell = `
-        <div class="icon">
-                <lottie-player id="${id}" src="assets/json/${name}.json" background="transparent"  speed="1"  style="width: 50px; height: 50px;" hover loop></lottie-player>
-            </div>
-        `
+// GSAP IMPORTS ==================
+const gsapTl = createGsapTimeline(titleContainer);
+const randomOrderGenerator = generateRandomOrder(iconCells);
 
-    return iconCell;
+// Apply GSAP animations to icons in random order
+for (let i = 0; i < iconCells.length; i++) {
+    gsapTl.to(iconCells[randomOrderGenerator.next().value], {
+        opacity: 1,
+        duration: .3
+    }, "-=.25");
 }
+// END OF GSAP IMPORTS ===========
+
+const icons = document.querySelectorAll(".icon");
+
+icons.forEach(icon => {
+    let lottie = icon.querySelector("lottie-player");
+
+    if(!icon.classList.contains("empty-icon")) {
+        icon.addEventListener("mouseenter", () => {
+            lottie.play();
+        });
+
+        icon.addEventListener("mouseleave", () => {
+            lottie.stop();
+        });
+    };
+});
+

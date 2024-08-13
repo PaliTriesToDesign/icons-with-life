@@ -160,6 +160,14 @@ img {
     position: absolute;
 }
 
+.icon:hover > img {
+    opacity: 0;
+}
+
+.icon:hover > lottie-player {
+    opacity: 1;
+}
+
 .icon:has(img + lottie-player) lottie-player {
     opacity: 0;
 }
