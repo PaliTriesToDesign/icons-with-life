@@ -139,37 +139,6 @@ function copiedTooltip(){
 }
 // END OF COPY CODE
 
-// CREATE GRID
-const gridTest = document.getElementById("gridTest");
-
-let gridCols = 9;
-let gridRows = 9;
-let titleRow = Math.floor(gridRows / 2);
-
-
-
-for(let i = 0; i < gridRows; i++){
-    let newRowEl = document.createElement("div");
-    newRowEl.classList.add("grid-row");
-    gridTest.appendChild(newRowEl);
-
-    
-
-    for(let j = 0; j < gridCols; j++){
-        let newColEl = document.createElement("div");
-        newColEl.classList.add("empty-icon");
-        newRowEl.appendChild(newColEl);
-
-        if(i === titleRow - 1 || i === titleRow + 1) {
-            newRowEl.style.backgroundColor = "green";
-        }
-
-        if(i === titleRow && j === titleRow) {
-            newColEl.style.backgroundColor = "red";
-        }
-    }
-}
-
 function createIconCell(id, name){
     let iconCell = `
         <div class="icon">
