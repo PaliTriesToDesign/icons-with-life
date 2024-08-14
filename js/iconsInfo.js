@@ -1,4 +1,4 @@
-const lottieSize = 150;
+const lottieSize = 100;
 export const jsonArr = [{
     id: 1,
     name: "Cross",

@@ -46,26 +46,34 @@
 
     <!-- MODAL -->
     <div id="modal" class="texture">
+
         <div id="iconModal" class="icon-modal">
+            
             <div id="closeModal" class="close-icon">
                 <lottie-player src="assets/json/closeIcon.json" background="transparent"  speed="1"  style="width: 36px; height: 36px;" hover></lottie-player>
             </div>
+
             <div id="iconContainer" class="icon-container">
                 <lottie-player src="assets/json/searchIcon.json" background="transparent"  speed=".5"  style="width: 250px; height: 250px;" loop autoplay></lottie-player>
             </div>
+
+            <div id="iconNameContainer" class="icon-name-container">
+                <p id="iconNameModal" class="icon-name-modal">Icon Name</p>
+            </div>
+
             <div class="button-textarea-container">
                 <div class="textarea">
-                    <textarea name="json-code" id="jsonCode" rows="10" readonly>
-                        
-                    </textarea>
-                </div>
-
-                <div class="button-container">
-                    <a id="downloadSvg" href="assets/svg/Cross Icon.svg" download="cross_icon.svg">SVG</a>
-                    <a id="downloadJson" href="assets/json/closeIconV1.json" download="cross_icon.json">JSON</a>
+                    <textarea name="json-code" id="jsonCode" rows="10" readonly></textarea>
                 </div>
             </div>
+
+            <div class="button-container">
+                <a id="downloadSvg" href="assets/svg/Cross Icon.svg" download="cross_icon.svg">SVG</a>
+                <a id="downloadJson" href="assets/json/closeIconV1.json" download="cross_icon.json">JSON</a>
+            </div>
+
         </div>
+
     </div>
     <!-- END OF MODAL -->
 

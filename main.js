@@ -67,6 +67,7 @@ iconsArr.forEach((icon, index) => {
         cell.addEventListener("click", () => {
             updateModal(jsonArr[index]);
             displayModal("flex");
+            changeBodyColor("hsl(0, 0%, 92%)");
     })};
 
     // Adds an eventListener to each icon in the array
@@ -102,18 +103,25 @@ iconCells.forEach(cell => {
 body.addEventListener("click", event => {
     if(modal.classList.contains("display-modal") && event.target === modal){
         modal.classList.remove("display-modal");
+        changeBodyColor("hsl(0, 100%, 100%)");
     };
 });
 
 
 closeModal.addEventListener("click", () => {
     displayModal("none");
+    changeBodyColor("hsl(0, 100%, 100%)");
 });
 
 // UPDATE MODAL ELEMENTS =========
 function updateIconContainer(icon) {
     const iconContainer = document.getElementById("iconContainer");
     iconContainer.innerHTML = icon.lottie;
+}
+
+function updateIconName(icon) {
+    const iconNameModal = document.getElementById("iconNameModal");
+    iconNameModal.innerText = icon.name.toLowerCase() + " icon";
 }
 
 function updateDownloadLinks(icon) {
@@ -134,6 +142,7 @@ function updateTextarea(icon) {
 
 function updateModal(icon) {
     updateIconContainer(icon);
+    updateIconName(icon);
     updateDownloadLinks(icon);
     updateTextarea(icon);
 }
@@ -141,6 +150,10 @@ function updateModal(icon) {
 function displayModal(){
     modal.classList.toggle("display-modal");
 };
+
+function changeBodyColor(color){
+    body.style.backgroundColor = color;
+}
 // END OF UPDATE MODAL ELEMENTS ==
 
 // COPY CODE FUNCTION ============
