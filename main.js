@@ -52,8 +52,9 @@ const searchIcon = new Icon(4, 'searchIconV2', 30);
 const plusToCloseIcon = new Icon(5, 'plusToCloseIcon', 30);
 const shareIcon = new Icon(6, 'shareIcon', 30);
 const menuIcon = new Icon(7, 'menuIcon', 30);
+const sidebarIcon = new Icon(8, 'sidebarIcon', 30);
 
-iconsArr.push(closeIcon, plusIcon, alertIcon, searchIcon,      plusToCloseIcon, shareIcon, menuIcon);
+iconsArr.push(closeIcon, plusIcon, alertIcon, searchIcon,plusToCloseIcon, shareIcon, menuIcon, sidebarIcon);
 
 iconsArr.forEach((icon, index) => {
     let cell = document.createElement("div");
