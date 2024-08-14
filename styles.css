@@ -1,7 +1,7 @@
 :root {
     --text-color: hsl(0, 0%, 7%);
-    --background-color: hsla(33, 100%, 63%, 1);
-    --gradient-color: hsl(340, 100%, 63%);
+    --background-color: rgb(66, 255, 113);
+    --gradient-color: hsl(181, 100%, 63%);
     --cell-background: hsl(0, 0%, 100%);
     --cell-border: hsl(0, 0%, 85%);
     --cell-border: hsl(33, 100%, 63%);
@@ -205,6 +205,7 @@ img {
     position: absolute;
     inset: 0;
     /* background: linear-gradient(30deg, var(--background-color), var(--gradient-color)); */
+    transition: all 200ms ease-in-out;
     backdrop-filter: blur(10px);
     z-index: 8;
 }
@@ -376,11 +377,47 @@ img {
     font-family: "Inter", sans-serif;
     cursor: pointer;
     text-decoration: none;
+    
+    position: relative;
+    overflow: hidden;
+}
+
+.button-container .button-text-container {
+    height: 1rem;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.button-container a:hover .button-text-container p {
+    transition: all 200ms cubic-bezier(0.175, 0.885, 0.32, .875);
+    transform: translateY(-100%);
+}
+
+.button-container:hover .button-text-container p:last-of-type {
+    color: var(--text-color);
+}
+
+.button-container a .button-square {
+    position: absolute;
+    bottom: -100%;
+    width: 105%;
+    height: 100%;
+    /* background-color: var(--background-color); */
+    background: linear-gradient(30deg, var(--background-color), var(--gradient-color));;
+    border-radius: 5rem;
+    transition: all 200ms cubic-bezier(0.175, 0.885, 0.32, .875);
 }
 
 .button-container a:hover {
-    background-color: var(--background-color);
+    /* background-color: var(--background-color); */
     color: var(--text-color);
+}
+
+.button-container a:hover .button-square {
+    border-radius: 0;
+    bottom: 0;
+    width: 120%;
+    height: 120%;
 }
 
 .textarea {
