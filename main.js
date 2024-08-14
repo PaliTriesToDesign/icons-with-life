@@ -48,7 +48,7 @@ class Icon {
 const closeIcon = new Icon(1, 'closeIcon', 30);
 const plusIcon = new Icon(2, 'plusIcon', 30);
 const alertIcon = new Icon(3, 'alertIcon', 30, true);
-const searchIcon = new Icon(4, 'searchIcon', 30);
+const searchIcon = new Icon(4, 'searchIconV2', 30);
 const plusToCloseIcon = new Icon(5, 'plusToCloseIcon', 30);
 const shareIcon = new Icon(6, 'shareIcon', 30);
 const menuIcon = new Icon(7, 'menuIcon', 30);
