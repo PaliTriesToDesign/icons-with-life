@@ -5,7 +5,7 @@ export const jsonArr = [{
     url: [{
             json: "assets/json/closeIcon.json"
         },{
-            svg: "assets/svg/Cross Icon.svg"
+            svg: "assets/svg/crossIcon.svg"
         }],
     lottie: `<lottie-player src="assets/json/closeIcon.json" background="transparent"  speed="1"  style="width: ${lottieSize}px; height: ${lottieSize}px;" autoplay loop></lottie-player>`,
     jsonCode: 
@@ -17,7 +17,7 @@ export const jsonArr = [{
     url: [{
         json: "assets/json/plusIcon.json"
     },{
-        svg: "assets/svg/Plus Icon.svg"
+        svg: "assets/svg/plusIcon.svg"
     }],
     lottie: `<lottie-player src="assets/json/plusIcon.json" background="transparent"  speed="1"  style="width: ${lottieSize}px; height: ${lottieSize}px;" autoplay loop></lottie-player>`,
     jsonCode: 
@@ -29,7 +29,7 @@ export const jsonArr = [{
         url: [{
             json: "assets/json/alertIconV2.json"
         },{
-            svg: "assets/svg/Alert.svg"
+            svg: "assets/svg/alertIcon.svg"
         }],
         lottie: `<lottie-player src="assets/json/alertIcon.json" background="transparent"  speed="1"  style="width: ${lottieSize}px; height: ${lottieSize}px;" autoplay loop></lottie-player>`,
         jsonCode:
@@ -41,7 +41,7 @@ export const jsonArr = [{
     url: [{
         json: "assets/json/searchIconV2.json"
     },{
-        svg: "assets/svg/Search Icon.svg"
+        svg: "assets/svg/searchIcon.svg"
     }],
     lottie: `<lottie-player src="assets/json/searchIconV2.json" background="transparent"  speed="1"  style="width: ${lottieSize}px; height: ${lottieSize}px;" autoplay loop></lottie-player>`,
     jsonCode:
@@ -53,7 +53,7 @@ export const jsonArr = [{
         url: [{
             json: "assets/json/plusToCloseIcon.json"
         },{
-            svg: "assets/svg/Plus Icon.svg"
+            svg: "assets/svg/plusIcon.svg"
         }],
         lottie: `<lottie-player src="assets/json/plusToCloseIcon.json" background="transparent"  speed="1"  style="width: ${lottieSize}px; height: ${lottieSize}px;" autoplay loop></lottie-player>`,
         jsonCode: 
