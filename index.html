@@ -16,6 +16,23 @@
     <script src="main.js" type="module" defer></script>
 </head>
 <body>
+
+    <audio id="clickHover">
+        <source src="assets/soundFx/hoverClick.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="clickHoverEmpty">
+        <source src="assets/soundFx/hoverEmpty.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="closeModalSound">
+        <source src="assets/soundFx/closeModal.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="openModalSound">
+        <source src="assets/soundFx/openModal.mp3" type="audio/mpeg">
+    </audio>
+
     <div id="logoContainer" class="logo-container">
         <a href="index.html">
             <lottie-player id="logo" src="assets/json/logo.json" background="transparent"  speed="1"  style="width: 35px; height: 35px;" hover loop></lottie-player>
@@ -35,7 +52,6 @@
     
     <main class="main-section" draggable="false">
         <div id="grid" class="icons-grid">
-
             <div id="titleContainer" class="title-container">
                 <p id="title">iconswith.<span>life</span></p>
                 <p id="titleNames">vaib & pali</p>
@@ -43,6 +59,14 @@
             
         </div>
     </main>
+
+    <div id="soundWaves" class="sound-on">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
 
     <!-- MODAL -->
     <div id="modal" class="texture">

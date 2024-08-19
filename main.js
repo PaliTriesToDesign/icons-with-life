@@ -1,5 +1,6 @@
 import { jsonArr } from "./js/iconsInfo.js";
 import { createGsapTimeline, generateRandomOrder } from "./js/animations.js";
+import { pauseClickHover, playClickHover, playCloseModal, playEmptyHover, playLogoSound, playOpenModal } from "./js/soundFx.js";
 
 const body = document.querySelector("body");
 const titleContainer = document.getElementById("titleContainer");
@@ -62,26 +63,6 @@ iconsArr.forEach((icon, index) => {
     cell.innerHTML = icon.lottie
     
     iconCells.push(cell);
-
-    if(!cell.classList.contains("empty-icon")) {
-        cell.addEventListener("click", () => {
-            updateModal(jsonArr[index]);
-            displayModal("flex");
-            changeBodyColor("hsl(0, 0%, 92%)");
-    })};
-
-    // Adds an eventListener to each icon in the array
-    cell.addEventListener("mouseenter", () => {
-        if(cell.classList.contains("empty-icon")){
-            titleEl.innerText = "coming soon...";
-        }
-
-        titleEl.innerText = jsonArr[index].name.toLowerCase();
-    });
-
-    cell.addEventListener("mouseleave", () => {
-        titleEl.innerHTML = "iconswith.<span>life</span>";
-    });
 });
 
 // Fills the rest of the grid with empy cells
@@ -99,10 +80,40 @@ iconCells.forEach(cell => {
     gridEl.appendChild(cell);
 })
 
+// Adds an eventListener to each ICON CELL in the array;
+iconCells.forEach((cell, index) => {
+cell.addEventListener("mouseenter", () => {  
+    
+    playClickHover();
+    
+    if(cell.classList.contains("empty-icon")){
+        titleEl.innerText = "coming soon...";
+    } else {
+        titleEl.innerText = jsonArr[index].name.toLowerCase();
+    }
+});
+
+cell.addEventListener("mouseleave", () => {
+    titleEl.innerHTML = "iconswith.<span>life</span>";
+    pauseClickHover();
+});
+
+if(!cell.classList.contains("empty-icon")) {
+    
+    cell.addEventListener("click", () => {
+        updateModal(jsonArr[index]);
+        displayModal("flex");
+        playOpenModal();
+        changeBodyColor("hsl(0, 0%, 92%)");
+        })
+    };
+})
+
 // Checks if the body contains a class to display the modal
 body.addEventListener("click", event => {
     if(modal.classList.contains("display-modal") && event.target === modal){
         modal.classList.remove("display-modal");
+        playCloseModal();
         changeBodyColor("hsl(0, 100%, 100%)");
     };
 });
@@ -110,6 +121,7 @@ body.addEventListener("click", event => {
 
 closeModal.addEventListener("click", () => {
     displayModal("none");
+    playCloseModal();
     changeBodyColor("hsl(0, 100%, 100%)");
 });
 
@@ -218,3 +230,16 @@ icons.forEach(icon => {
     };
 });
 
+modal.querySelector(".textarea").addEventListener("click", () => {
+    playOpenModal();
+})
+
+const downloadButtons = modal.querySelectorAll(".button-container a");
+downloadButtons.forEach(button => {
+    button.addEventListener("mouseenter", () => {
+        playClickHover();
+    })
+    button.addEventListener("click", () => {
+        playOpenModal();
+    })
+})
