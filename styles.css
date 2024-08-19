@@ -470,7 +470,7 @@ img {
 
 /* SOUND WAVES =================== */
 #soundWaves {
-    position: absolute;
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
