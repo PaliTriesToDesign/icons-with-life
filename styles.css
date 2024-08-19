@@ -180,7 +180,12 @@ img {
 
 .icon:hover {
     border: 2px solid var(--text-color);
+    transform: scale(1.1);
     cursor: pointer;
+}
+
+.icon.empty-icon:hover {
+    border: 2px solid var(--cell-border);
 }
 
 .icon lottie-player:hover {
