@@ -10,6 +10,12 @@ const gridEl = document.getElementById("grid");
 const iconsArr = [];
 const iconCells = [];
 
+const root = document.querySelector(":root");
+const bgColor = "hsl(0, 0%, 100%)";
+const bgColorDark = "hsl(0, 0%, 92%)";
+root.style.setProperty("--background-color-white", bgColor);
+
+
 class Icon {
     constructor(id, name, size, needsSVG = false) {
         this.id = id;
@@ -42,7 +48,7 @@ class Icon {
                     hover loop>
                 </lottie-player>
             `;
-        }
+        };
     };
 };
 
@@ -104,7 +110,7 @@ if(!cell.classList.contains("empty-icon")) {
         updateModal(jsonArr[index]);
         displayModal("flex");
         playOpenModal();
-        changeBodyColor("hsl(0, 0%, 92%)");
+        changeBodyColor(bgColorDark);
         })
     };
 })
@@ -114,7 +120,7 @@ body.addEventListener("click", event => {
     if(modal.classList.contains("display-modal") && event.target === modal){
         modal.classList.remove("display-modal");
         playCloseModal();
-        changeBodyColor("hsl(0, 100%, 100%)");
+        changeBodyColor(bgColor);
     };
 });
 
@@ -122,7 +128,7 @@ body.addEventListener("click", event => {
 closeModal.addEventListener("click", () => {
     displayModal("none");
     playCloseModal();
-    changeBodyColor("hsl(0, 100%, 100%)");
+    changeBodyColor(bgColor);
 });
 
 // UPDATE MODAL ELEMENTS =========
