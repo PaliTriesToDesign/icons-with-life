@@ -60,8 +60,11 @@ const plusToCloseIcon = new Icon(5, 'plusToCloseIcon', 30);
 const shareIcon = new Icon(6, 'shareIcon', 30);
 const menuIcon = new Icon(7, 'menuIcon', 30);
 const sidebarIcon = new Icon(8, 'sidebarIcon', 30);
+const boxIcon = new Icon(8, 'boxIcon', 30);
+const donwloadIcon = new Icon(8, 'downloadIcon', 30, true);
+const arrowLeftIcon = new Icon(8, 'arrowLeftIcon', 30);
 
-iconsArr.push(closeIcon, plusIcon, alertIcon, searchIcon,plusToCloseIcon, shareIcon, menuIcon, sidebarIcon);
+iconsArr.push(closeIcon, plusIcon, alertIcon, searchIcon,plusToCloseIcon, shareIcon, menuIcon, sidebarIcon, boxIcon, donwloadIcon, arrowLeftIcon);
 
 iconsArr.forEach((icon, index) => {
     let cell = document.createElement("div");
