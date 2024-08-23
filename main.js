@@ -15,6 +15,7 @@ const bgColor = "hsl(0, 0%, 100%)";
 const bgColorDark = "hsl(0, 0%, 92%)";
 root.style.setProperty("--background-color-white", bgColor);
 
+const NEW_ICON_BATCH = 4;
 
 class Icon {
     constructor(id, name, size, needsSVG = false) {
@@ -71,7 +72,12 @@ iconsArr.forEach((icon, index) => {
     let cell = document.createElement("div");
     cell.classList.add("icon");
     cell.innerHTML = icon.lottie
-    
+
+    // Creates Icon Tag for the last NEW_ICON_BATCH elements
+    if (index >= iconsArr.length - NEW_ICON_BATCH) {
+        createIconTag(cell);
+    }
+
     iconCells.push(cell);
 });
 
@@ -242,7 +248,7 @@ icons.forEach(icon => {
 
 modal.querySelector(".textarea").addEventListener("click", () => {
     playOpenModal();
-})
+});
 
 const downloadButtons = modal.querySelectorAll(".button-container a");
 downloadButtons.forEach(button => {
@@ -252,4 +258,12 @@ downloadButtons.forEach(button => {
     button.addEventListener("click", () => {
         playOpenModal();
     })
-})
+});
+
+// NEW ICON TAG
+function createIconTag(cell){
+    const newIconTag = document.createElement("div");
+    newIconTag.classList.add("new-icon-tag");
+    cell.appendChild(newIconTag);
+};
+//END OF NEW ICON TAG
