@@ -1,13 +1,13 @@
 import { jsonArr } from "./js/iconsInfo.js";
 import { createGsapTimeline, generateRandomOrder } from "./js/animations.js";
-import { pauseClickHover, playClickHover, playCloseModal, playEmptyHover, playLogoSound, playOpenModal } from "./js/soundFx.js";
+import { pauseClickHover, playClickHover, playCloseModal, playOpenModal } from "./js/soundFx.js";
 
 const body = document.querySelector("body");
 const titleContainer = document.getElementById("titleContainer");
 const titleEl = document.getElementById("title");
 const modal = document.getElementById("modal");
 const gridEl = document.getElementById("grid");
-const iconsArr = [];
+// const iconsArr = [];
 const iconCells = [];
 
 const root = document.querySelector(":root");
@@ -18,56 +18,53 @@ root.style.setProperty("--background-color-white", bgColor);
 const NEW_ICON_BATCH = 4;
 
 class Icon {
-    constructor(id, name, size, needsSVG = false) {
+    constructor(id, name, size, needsSVG = false, isNew = false) {
         this.id = id;
+        this.isNew = isNew;
         this.name = name;
         this.jsonUrl = `assets/json/${name}.json`;
         this.svgUrl = `assets/svg/${name}.svg`;
         this.size = size;
-        if(needsSVG) {
-            this.lottie = `
-            <img src="${this.svgUrl}" alt="${name} icon">
+
+        // Create the SVG element if needed
+        const svgTag = needsSVG ? `<img src="${this.svgUrl}" alt="${name} icon">` : '';
+
+        // Lottie structure
+        this.lottie = `
+            ${svgTag}
             <lottie-player 
-                    id="${id}" 
-                    src="${this.jsonUrl}"
-                    background="transparent" 
-                    speed="1"  
-                    style="width: ${this.size}px; 
-                    height: ${this.size}px;" 
-                    hover loop>
-                </lottie-player>
-            `;
-        } else {
-            this.lottie = `
-            <lottie-player 
-                    id="${id}" 
-                    src="${this.jsonUrl}"
-                    background="transparent" 
-                    speed="1"  
-                    style="width: ${this.size}px; 
-                    height: ${this.size}px;" 
-                    hover loop>
-                </lottie-player>
-            `;
-        };
-    };
-};
+                id="${id}" 
+                src="${this.jsonUrl}"
+                background="transparent" 
+                speed="1"  
+                style="width: ${this.size}px; height: ${this.size}px;" 
+                hover loop>
+            </lottie-player>
+        `;
+    }
+}
 
-const closeIcon = new Icon(1, 'closeIcon', 30);
-const plusIcon = new Icon(2, 'plusIcon', 30);
-const alertIcon = new Icon(3, 'alertIcon', 30, true);
-const searchIcon = new Icon(4, 'searchIconV2', 30);
-const plusToCloseIcon = new Icon(5, 'plusToCloseIcon', 30);
-const shareIcon = new Icon(6, 'shareIcon', 30);
-const menuIcon = new Icon(7, 'menuIcon', 30);
-const sidebarIcon = new Icon(8, 'sidebarIcon', 30);
-const boxIcon = new Icon(8, 'boxIcon', 30);
-const donwloadIcon = new Icon(8, 'downloadIcon', 30, true);
-const arrowLeftIcon = new Icon(8, 'arrowLeftIcon', 30);
-const infoIcon = new Icon(8, 'infoIconV2', 30);
 
-iconsArr.push(closeIcon, plusIcon, alertIcon, searchIcon,plusToCloseIcon, shareIcon, menuIcon, sidebarIcon, boxIcon, donwloadIcon, arrowLeftIcon, infoIcon);
+// Helper function to create icons
+const createIcon = (id, name, size = 30, needsSVG = false, isNew = false) => new Icon(id, name, size, needsSVG, isNew);
 
+// Unique icon definitions
+const iconsArr = [
+    createIcon(1, 'closeIcon'),
+    createIcon(2, 'plusIcon'),
+    createIcon(3, 'alertIcon', 30, true, true),   // 'isNew' set to true
+    createIcon(4, 'searchIconV2'),
+    createIcon(5, 'plusToCloseIcon'),
+    createIcon(6, 'shareIcon'),
+    createIcon(7, 'menuIcon'),
+    createIcon(8, 'sidebarIcon'),
+    createIcon(9, 'boxIcon'),
+    createIcon(10, 'downloadIcon', 30, true, true),   // 'needsSVG' and 'isNew' set to true
+    createIcon(11, 'arrowLeftIcon'),
+    createIcon(12, 'infoIconV2')
+];
+
+// Creates a cell element with an icon for each icon object created 
 iconsArr.forEach((icon, index) => {
     let cell = document.createElement("div");
     cell.classList.add("icon");
@@ -80,6 +77,8 @@ iconsArr.forEach((icon, index) => {
 
     iconCells.push(cell);
 });
+
+
 
 // Fills the rest of the grid with empy cells
 const totalCells = 12; // Arbitrary number
@@ -121,6 +120,11 @@ if(!cell.classList.contains("empty-icon")) {
         displayModal("flex");
         playOpenModal();
         changeBodyColor(bgColorDark);
+
+        if(index >= iconsArr.length - NEW_ICON_BATCH){
+            createIconTag(modal);
+        }
+
         })
     };
 })
@@ -261,9 +265,20 @@ downloadButtons.forEach(button => {
 });
 
 // NEW ICON TAG
-function createIconTag(cell){
+function createIconTag(parent) {
+    const iconContainer = parent.querySelector(".icon-container") || parent; // Fallback to parent if there's no container
     const newIconTag = document.createElement("div");
-    newIconTag.classList.add("new-icon-tag");
-    cell.appendChild(newIconTag);
-};
+    
+    // Determine the class name based on whether the parent is the modal
+    const isModal = parent === modal;
+    newIconTag.classList.add(isModal ? "new-icon-tag-modal" : "new-icon-tag");
+
+    // Set inner content for modal case
+    if (isModal) {
+        newIconTag.innerHTML = `<p>new</p>`;
+    }
+
+    // Append the new icon tag
+    iconContainer.appendChild(newIconTag);
+}
 //END OF NEW ICON TAG

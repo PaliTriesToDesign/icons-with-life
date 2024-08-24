@@ -163,16 +163,27 @@ img {
     font-weight: bold;
 }
 
-.new-icon-tag {
-    background-color: var(--button-gradient-color-1);
+.new-icon-tag, .new-icon-tag-modal {
+    background: linear-gradient(30deg, var(--button-gradient-color-2), var(--button-gradient-color-1));
     font-weight: bold;
-    font-size: .6rem;
     border-radius: 1rem;
     height: 10px;
     width: 10px;
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
+}
+
+.new-icon-tag-modal {
+    --distance: 1rem;
+    position: absolute;
+    right: var(--distance);
+    top: var(--distance);
+    height: fit-content;
+    width: fit-content;
+    border-radius: .5rem;
+    padding: .25rem .5rem;
+    font-size: .75rem;
 }
 
 .new-icon-tag p {
@@ -307,6 +318,11 @@ img {
     grid-row: 1/3;
 }
 
+.icon-container:hover .new-icon-tag-modal {
+    transform: scale(1.1);
+    pointer-events: none;
+}
+
 .button-container {
     grid-row: 1/2;
 }
@@ -416,7 +432,7 @@ img {
     width: 105%;
     height: 100%;
     /* background-color: var(--background-color); */
-    background: linear-gradient(30deg, var(--button-gradient-color-2), var(--button-gradient-color-1));;
+    background: linear-gradient(30deg, var(--button-gradient-color-2), var(--button-gradient-color-1));
     border-radius: 5rem;
     transition: all 200ms cubic-bezier(0.175, 0.885, 0.32, .875);
 }
