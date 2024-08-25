@@ -1,4 +1,4 @@
-import { jsonArr } from "./js/iconsInfo.js";
+// import { jsonArr } from "./js/iconsInfo.js";
 import { createGsapTimeline, generateRandomOrder } from "./js/animations.js";
 import { pauseClickHover, playClickHover, playCloseModal, playOpenModal } from "./js/soundFx.js";
 
@@ -7,7 +7,6 @@ const titleContainer = document.getElementById("titleContainer");
 const titleEl = document.getElementById("title");
 const modal = document.getElementById("modal");
 const gridEl = document.getElementById("grid");
-// const iconsArr = [];
 const iconCells = [];
 
 const root = document.querySelector(":root");
@@ -20,25 +19,37 @@ const NEW_ICON_BATCH = 4;
 class Icon {
     constructor(id, name, size, needsSVG = false, isNew = false) {
         this.id = id;
-        this.isNew = isNew;
         this.name = name;
+        this.size = size;
         this.jsonUrl = `assets/json/${name}.json`;
         this.svgUrl = `assets/svg/${name}.svg`;
-        this.size = size;
+        this.needsSVG = needsSVG;
+        this.isNew = isNew;
+    }
 
-        // Create the SVG element if needed
-        const svgTag = needsSVG ? `<img src="${this.svgUrl}" alt="${name} icon">` : '';
+    // Method to generate Lottie HTML, with optional SVG for main display
+    getLottieHTML(isModal = false) {
+        const width = isModal ? 100 : this.size;  // 100px for modal, size for main grid
+        const height = isModal ? 100 : this.size;
 
-        // Lottie structure
-        this.lottie = `
-            ${svgTag}
+        // If it's not modal and needs SVG, include the SVG in the HTML
+        const svgHTML = this.needsSVG && !isModal
+            ? `<img src="${this.svgUrl}" alt="${this.name} icon" style="width: ${width}px; height: ${height}px;">`
+            : '';  // Empty string if SVG is not needed or if it's modal
+
+        // Determine Lottie player behavior: hover for main grid, autoplay for modal
+        const behavior = isModal ? 'autoplay' : 'hover';
+
+        // Return the complete HTML with conditional SVG and Lottie animation
+        return `
+            ${svgHTML}  <!-- Include SVG only if needed -->
             <lottie-player 
-                id="${id}" 
-                src="${this.jsonUrl}"
+                id="${this.id}" 
+                src="${this.jsonUrl}" 
                 background="transparent" 
                 speed="1"  
-                style="width: ${this.size}px; height: ${this.size}px;" 
-                hover loop>
+                style="width: ${width}px; height: ${height}px;" 
+                ${behavior} loop>
             </lottie-player>
         `;
     }
@@ -50,25 +61,25 @@ const createIcon = (id, name, size = 30, needsSVG = false, isNew = false) => new
 
 // Unique icon definitions
 const iconsArr = [
-    createIcon(1, 'closeIcon'),
-    createIcon(2, 'plusIcon'),
-    createIcon(3, 'alertIcon', 30, true, true),   // 'isNew' set to true
-    createIcon(4, 'searchIconV2'),
-    createIcon(5, 'plusToCloseIcon'),
-    createIcon(6, 'shareIcon'),
-    createIcon(7, 'menuIcon'),
-    createIcon(8, 'sidebarIcon'),
-    createIcon(9, 'boxIcon'),
-    createIcon(10, 'downloadIcon', 30, true, true),   // 'needsSVG' and 'isNew' set to true
-    createIcon(11, 'arrowLeftIcon'),
-    createIcon(12, 'infoIconV2')
+    createIcon(1, 'close_Icon'),
+    createIcon(2, 'plus_Icon'),
+    createIcon(3, 'alert_Icon', 30, true, true),
+    createIcon(4, 'search_Icon_V2'),
+    createIcon(5, 'plus_Close_Icon'),
+    createIcon(6, 'share_Icon'),
+    createIcon(7, 'menu_Icon'),
+    createIcon(8, 'sidebar_Icon'),
+    createIcon(9, 'box_Icon'),
+    createIcon(10, 'download_Icon', 30, true, true),
+    createIcon(11, 'arrow_Left_Icon'),
+    createIcon(12, 'info_Icon_V2'),
 ];
 
 // Creates a cell element with an icon for each icon object created 
 iconsArr.forEach((icon, index) => {
     let cell = document.createElement("div");
     cell.classList.add("icon");
-    cell.innerHTML = icon.lottie
+    cell.innerHTML = icon.getLottieHTML();
 
     // Creates Icon Tag for the last NEW_ICON_BATCH elements
     if (index >= iconsArr.length - NEW_ICON_BATCH) {
@@ -78,9 +89,7 @@ iconsArr.forEach((icon, index) => {
     iconCells.push(cell);
 });
 
-
-
-// Fills the rest of the grid with empy cells
+// Fills the rest of the grid with empy cells (if needed)
 const totalCells = 12; // Arbitrary number
 const totalEmptyCells = totalCells - iconsArr.length;
 
@@ -104,7 +113,7 @@ cell.addEventListener("mouseenter", () => {
     if(cell.classList.contains("empty-icon")){
         titleEl.innerText = "coming soon...";
     } else {
-        titleEl.innerText = jsonArr[index].name.toLowerCase();
+        titleEl.innerText = iconsArr[index].name.toLowerCase();
     }
 });
 
@@ -116,7 +125,7 @@ cell.addEventListener("mouseleave", () => {
 if(!cell.classList.contains("empty-icon")) {
     
     cell.addEventListener("click", () => {
-        updateModal(jsonArr[index]);
+        updateModal(iconsArr[index]);
         displayModal("flex");
         playOpenModal();
         changeBodyColor(bgColorDark);
@@ -148,35 +157,43 @@ closeModal.addEventListener("click", () => {
 // UPDATE MODAL ELEMENTS =========
 function updateIconContainer(icon) {
     const iconContainer = document.getElementById("iconContainer");
-    iconContainer.innerHTML = icon.lottie;
+    iconContainer.innerHTML = icon.getLottieHTML(true);
 }
 
 function updateIconName(icon) {
     const iconNameModal = document.getElementById("iconNameModal");
-    iconNameModal.innerText = icon.name.toLowerCase() + " icon";
+    iconNameModal.innerText = icon.name.toLowerCase();
 }
 
 function updateDownloadLinks(icon) {
     const downloadSvg = document.getElementById("downloadSvg");
     const downloadJson = document.getElementById("downloadJson");
     
-    downloadSvg.setAttribute("href", icon.url[1].svg);
+    downloadSvg.setAttribute("href", icon.svgUrl);
     downloadSvg.setAttribute("download", `${icon.name}.svg`);
     
-    downloadJson.setAttribute("href", icon.url[0].json);
+    downloadJson.setAttribute("href", icon.jsonUrl);
     downloadJson.setAttribute("download", `${icon.name}.json`);
 }
 
-function updateTextarea(icon) {
+function updateTextarea(jsonContent) {
     const textarea = document.querySelector("textarea");
-    textarea.innerText = icon.jsonCode;
+    textarea.textContent = JSON.stringify(jsonContent, null, 1);  // Format and display JSON in the textarea
+}
+
+function fetchJsonData(icon){
+    // Fetch the JSON file for the clicked icon
+    fetch(icon.jsonUrl)   
+    .then(response => response.json())  // Convert response to JSON object
+    .then(data => updateTextarea(data))  // Pass the fetched JSON data to updateTextarea        
+    .catch(error => console.error('Error fetching JSON:', error))  // Handle any fetch errors;
 }
 
 function updateModal(icon) {
     updateIconContainer(icon);
     updateIconName(icon);
     updateDownloadLinks(icon);
-    updateTextarea(icon);
+    fetchJsonData(icon);
 }
 
 function displayModal(){
