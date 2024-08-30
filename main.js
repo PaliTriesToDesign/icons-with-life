@@ -1,4 +1,3 @@
-// import { jsonArr } from "./js/iconsInfo.js";
 import { createGsapTimeline, generateRandomOrder } from "./js/animations.js";
 import { pauseClickHover, playClickHover, playCloseModal, playOpenModal } from "./js/soundFx.js";
 
@@ -14,7 +13,7 @@ const bgColor = "hsl(0, 0%, 100%)";
 const bgColorDark = "hsl(0, 0%, 92%)";
 root.style.setProperty("--background-color-white", bgColor);
 
-const NEW_ICON_BATCH = 4;
+const NEW_ICON_BATCH = 5;
 
 class Icon {
     constructor(id, name, size, needsSVG = false, isNew = false) {
@@ -63,7 +62,7 @@ const createIcon = (id, name, size = 30, needsSVG = false, isNew = false) => new
 const iconsArr = [
     createIcon(1, 'close_Icon'),
     createIcon(2, 'plus_Icon'),
-    createIcon(3, 'alert_Icon', 30, true, true),
+    createIcon(3, 'alert_Icon', 30, true, false),
     createIcon(4, 'search_Icon_V2'),
     createIcon(5, 'plus_Close_Icon'),
     createIcon(6, 'share_Icon'),
@@ -73,6 +72,11 @@ const iconsArr = [
     createIcon(10, 'download_Icon', 30, true, true),
     createIcon(11, 'arrow_Left_Icon'),
     createIcon(12, 'info_Icon_V2'),
+    createIcon(13, 'beer_Icon', 30),
+    createIcon(14, 'rocks_Icon', 30),
+    createIcon(15, 'watermelon_Icon', 30),
+    createIcon(17, 'old_fashion_Icon', 30),
+    createIcon(18, 'wedge_Icon', 30),
 ];
 
 // Creates a cell element with an icon for each icon object created 
