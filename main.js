@@ -13,7 +13,7 @@ const bgColor = "hsl(0, 0%, 100%)";
 const bgColorDark = "hsl(0, 0%, 92%)";
 root.style.setProperty("--background-color-white", bgColor);
 
-const NEW_ICON_BATCH = 5;
+const NEW_ICON_BATCH = 4;
 
 class Icon {
     constructor(id, name, size, needsSVG = false, isNew = false) {
@@ -77,6 +77,10 @@ const iconsArr = [
     createIcon(15, 'watermelon_Icon', 30),
     createIcon(17, 'old_fashion_Icon', 30),
     createIcon(18, 'wedge_Icon', 30),
+    createIcon(18, 'beer_Can_Icon', 30),
+    createIcon(18, 'martini_Icon', 30),
+    createIcon(18, 'white_Wine_Icon', 30),
+    createIcon(18, 'red_Wine_Icon', 30),
 ];
 
 // Creates a cell element with an icon for each icon object created 
